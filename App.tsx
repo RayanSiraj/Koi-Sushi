@@ -1,13 +1,12 @@
-
 import React from 'react';
-import { Navbar, Footer } from './components/Layout';
-import { Hero } from './components/Hero';
-import { Menu } from './components/Menu';
-import { ReservationsAI } from './components/ReservationsAI';
-import { Gallery } from './components/Gallery';
-import { Testimonials } from './components/Testimonials';
-import { ORDERING_URL } from './constants';
-import { ScrollReveal } from './components/ScrollReveal';
+import { Navbar, Footer } from './components/Layout.tsx';
+import { Hero } from './components/Hero.tsx';
+import { Menu } from './components/Menu.tsx';
+import { ReservationsAI } from './components/ReservationsAI.tsx';
+import { Gallery } from './components/Gallery.tsx';
+import { Testimonials } from './components/Testimonials.tsx';
+import { ORDERING_URL } from './constants.tsx';
+import { ScrollReveal } from './components/ScrollReveal.tsx';
 
 const App: React.FC = () => {
   return (
@@ -75,7 +74,7 @@ const App: React.FC = () => {
         {/* Gallery Section */}
         <Gallery />
 
-        {/* Brand Highlights Section - RE-DESIGNED FOR LARGER VISIBILITY */}
+        {/* Brand Highlights Section */}
         <section className="py-64 bg-neutral-950 border-t border-white/5 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-24 lg:gap-32">
@@ -98,7 +97,7 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        {/* Final CTA Section - RESOLVED OVERLAP AND VISIBILITY */}
+        {/* Final CTA Section */}
         <section className="relative min-h-screen w-full bg-neutral-900 overflow-hidden flex items-center justify-center py-32">
           <img 
             src="https://images.unsplash.com/photo-1476973422084-e0fa66ff9456?auto=format&fit=crop&q=80&w=2000" 

@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { ORDERING_URL, HOURS } from '../constants';
+import { ORDERING_URL, HOURS } from '../constants.tsx';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);

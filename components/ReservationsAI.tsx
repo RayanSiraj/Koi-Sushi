@@ -1,8 +1,7 @@
-
 import React, { useState, useRef, useEffect } from 'react';
-import { getGeminiResponse } from '../services/geminiService';
-import { ChatMessage } from '../types';
-import { ScrollReveal } from './ScrollReveal';
+import { getGeminiResponse } from '../services/geminiService.ts';
+import { ChatMessage } from '../types.ts';
+import { ScrollReveal } from './ScrollReveal.tsx';
 
 export const ReservationsAI: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -126,3 +125,16 @@ export const ReservationsAI: React.FC = () => {
                     </div>
                     <div className="mt-4 flex justify-between items-center text-[9px] text-white/20 uppercase tracking-[0.2em] font-bold">
                       <span>Secured Session</span>
+                      <span>Ponte Vedra, FL</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+};
