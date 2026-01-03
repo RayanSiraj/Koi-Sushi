@@ -1,0 +1,8 @@
+{
+  "name": "Koi Sushi & Thai - Modern Experience",
+  "description": "A next-generation web experience for Koi Sushi & Thai & Bar, featuring AI-powered reservations, seamless online ordering, and interactive menu showcases.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
