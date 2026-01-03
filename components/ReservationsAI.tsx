@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { getGeminiResponse } from '../services/geminiService.ts';
-import { ChatMessage } from '../types.ts';
-import { ScrollReveal } from './ScrollReveal.tsx';
+import { getGeminiResponse } from '../services/geminiService';
+import { ChatMessage } from '../types';
+import { ScrollReveal } from './ScrollReveal';
 
 export const ReservationsAI: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([

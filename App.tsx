@@ -1,12 +1,12 @@
 import React from 'react';
-import { Navbar, Footer } from './components/Layout.tsx';
-import { Hero } from './components/Hero.tsx';
-import { Menu } from './components/Menu.tsx';
-import { ReservationsAI } from './components/ReservationsAI.tsx';
-import { Gallery } from './components/Gallery.tsx';
-import { Testimonials } from './components/Testimonials.tsx';
-import { ORDERING_URL } from './constants.tsx';
-import { ScrollReveal } from './components/ScrollReveal.tsx';
+import { Navbar, Footer } from './components/Layout';
+import { Hero } from './components/Hero';
+import { Menu } from './components/Menu';
+import { ReservationsAI } from './components/ReservationsAI';
+import { Gallery } from './components/Gallery';
+import { Testimonials } from './components/Testimonials';
+import { ORDERING_URL } from './constants';
+import { ScrollReveal } from './components/ScrollReveal';
 
 const App: React.FC = () => {
   return (
@@ -14,12 +14,10 @@ const App: React.FC = () => {
       <Navbar />
       
       <main>
-        {/* Home Section */}
         <div id="home">
           <Hero />
         </div>
         
-        {/* Floating Quick CTA */}
         <a 
           href={ORDERING_URL}
           target="_blank"
@@ -30,7 +28,6 @@ const App: React.FC = () => {
           <i className="fas fa-utensils text-sm"></i>
         </a>
 
-        {/* Philosophy Section */}
         <section id="philosophy" className="py-40 md:py-64 bg-koi-black relative scroll-mt-24">
           <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-white/[0.01] to-transparent pointer-events-none"></div>
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -62,19 +59,11 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        {/* Menu Section */}
         <Menu />
-        
-        {/* Reservations Section */}
         <ReservationsAI />
-
-        {/* Testimonials Section */}
         <Testimonials />
-
-        {/* Gallery Section */}
         <Gallery />
 
-        {/* Brand Highlights Section */}
         <section className="py-64 bg-neutral-950 border-t border-white/5 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-24 lg:gap-32">
@@ -97,7 +86,6 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        {/* Final CTA Section */}
         <section className="relative min-h-screen w-full bg-neutral-900 overflow-hidden flex items-center justify-center py-32">
           <img 
             src="https://images.unsplash.com/photo-1476973422084-e0fa66ff9456?auto=format&fit=crop&q=80&w=2000" 
@@ -111,33 +99,17 @@ const App: React.FC = () => {
                 <div className="bg-koi-black/90 premium-blur border border-white/10 p-12 md:p-24 lg:p-32 text-center max-w-5xl mx-auto shadow-[0_50px_100px_rgba(0,0,0,0.8)]">
                     <span className="text-koi-gold font-bold tracking-[0.7em] uppercase text-[11px] mb-10 block">The Destination</span>
                     <h3 className="text-6xl md:text-8xl lg:text-9xl font-serif text-white mb-12 leading-tight font-bold">Elevated <br /> <span className="italic gold-gradient-text">Atmosphere</span></h3>
-                    
                     <div className="w-20 h-0.5 bg-koi-gold/50 mx-auto mb-12"></div>
-                    
                     <p className="text-white/90 text-lg md:text-xl mb-16 tracking-[0.3em] font-light uppercase">80 Executive Way, Suite 102 • Ponte Vedra Beach, FL</p>
-                    
                     <div className="flex flex-col md:flex-row items-center justify-center gap-10">
-                      <a 
-                        href="#reservations" 
-                        className="w-full md:w-auto bg-white text-koi-black px-20 py-6 font-bold text-[12px] uppercase tracking-[0.5em] hover:bg-koi-gold hover:text-white transition-all shadow-2xl flex items-center justify-center"
-                      >
-                        Request Table
-                      </a>
-                      <a 
-                        href="https://www.google.com/maps/dir/?api=1&destination=Koi+Sushi+Thai+Bar+Ponte+Vedra" 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full md:w-auto border border-white/20 text-white px-20 py-6 font-bold text-[12px] uppercase tracking-[0.5em] hover:bg-white hover:text-koi-black transition-all flex items-center justify-center backdrop-blur-sm"
-                      >
-                        Directions
-                      </a>
+                      <a href="#reservations" className="w-full md:w-auto bg-white text-koi-black px-20 py-6 font-bold text-[12px] uppercase tracking-[0.5em] hover:bg-koi-gold hover:text-white transition-all shadow-2xl flex items-center justify-center">Request Table</a>
+                      <a href="https://www.google.com/maps/dir/?api=1&destination=Koi+Sushi+Thai+Bar+Ponte+Vedra" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto border border-white/20 text-white px-20 py-6 font-bold text-[12px] uppercase tracking-[0.5em] hover:bg-white hover:text-koi-black transition-all flex items-center justify-center backdrop-blur-sm">Directions</a>
                     </div>
                 </div>
              </ScrollReveal>
           </div>
         </section>
       </main>
-
       <Footer />
     </div>
   );

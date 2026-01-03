@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { MENU_ITEMS, ORDERING_URL } from '../constants.tsx';
-import { MenuCategory } from '../types.ts';
-import { ScrollReveal } from './ScrollReveal.tsx';
+import { MENU_ITEMS, ORDERING_URL } from '../constants';
+import { MenuCategory } from '../types';
+import { ScrollReveal } from './ScrollReveal';
 
 export const Menu: React.FC = () => {
   const [activeTab, setActiveTab] = useState<MenuCategory>(MenuCategory.SUSHI);

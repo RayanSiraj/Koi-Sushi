@@ -1,5 +1,5 @@
 import React from 'react';
-import { ORDERING_URL } from '../constants.tsx';
+import { ORDERING_URL } from '../constants';
 
 export const Hero: React.FC = () => {
   const scrollToReservations = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -30,6 +30,7 @@ export const Hero: React.FC = () => {
           playsInline
           className="w-full h-full object-cover opacity-50"
           poster="https://images.unsplash.com/photo-1617196034183-421b4917c92d?auto=format&fit=crop&q=80&w=2000"
+          src="https://joy1.videvo.net/videvo_files/video/free/2019-11/large_watermarked/190828_27_Supermarket_12_preview.mp4"
         >
         </video>
         <div className="absolute inset-0 bg-gradient-to-t from-koi-black via-transparent to-koi-black/70"></div>
