@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { TESTIMONIALS } from '../constants';
-import { ScrollReveal } from './ScrollReveal';
+import { TESTIMONIALS } from '../constants.tsx';
+import { ScrollReveal } from './ScrollReveal.tsx';
 
 export const Testimonials: React.FC = () => {
   const [current, setCurrent] = useState(0);

@@ -1,12 +1,12 @@
 import React from 'react';
-import { Navbar, Footer } from './components/Layout';
-import { Hero } from './components/Hero';
-import { Menu } from './components/Menu';
-import { ReservationsAI } from './components/ReservationsAI';
-import { Gallery } from './components/Gallery';
-import { Testimonials } from './components/Testimonials';
-import { ORDERING_URL } from './constants';
-import { ScrollReveal } from './components/ScrollReveal';
+import { Navbar, Footer } from './components/Layout.tsx';
+import { Hero } from './components/Hero.tsx';
+import { Menu } from './components/Menu.tsx';
+import { ReservationsAI } from './components/ReservationsAI.tsx';
+import { Gallery } from './components/Gallery.tsx';
+import { Testimonials } from './components/Testimonials.tsx';
+import { ORDERING_URL } from './constants.tsx';
+import { ScrollReveal } from './components/ScrollReveal.tsx';
 
 const App: React.FC = () => {
   return (

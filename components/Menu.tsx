@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { MENU_ITEMS, ORDERING_URL } from '../constants';
-import { MenuCategory } from '../types';
-import { ScrollReveal } from './ScrollReveal';
+import { MENU_ITEMS, ORDERING_URL } from '../constants.tsx';
+import { MenuCategory } from '../types.ts';
+import { ScrollReveal } from './ScrollReveal.tsx';
 
 export const Menu: React.FC = () => {
   const [activeTab, setActiveTab] = useState<MenuCategory>(MenuCategory.SUSHI);
@@ -56,7 +56,7 @@ export const Menu: React.FC = () => {
                       alt={item.name} 
                       className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000"
                       onError={(e) => {
-                        (e.target as HTMLImageElement).src = 'https://mail.google.com/mail/u/0?ui=2&ik=8fde5005c0&attid=0.1&permmsgid=msg-f:1855846150427595207&th=19c14a3dba0351c7&view=att&zw&disp=safe';
+                        (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=800';
                       }}
                     />
                     {item.popular && (

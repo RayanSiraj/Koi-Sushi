@@ -1,5 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
-import { ChatMessage } from "../types";
+import { ChatMessage } from "../types.ts";
 
 const SYSTEM_INSTRUCTION = `
 You are the AI Concierge for Koi Sushi & Thai & Bar in Ponte Vedra/Jacksonville.
