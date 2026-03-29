@@ -1,5 +1,5 @@
 import React from 'react';
-import { ORDERING_URL } from '../constants.tsx';
+import { ORDERING_URL } from '../constants';
 
 export const Hero: React.FC = () => {
   const scrollToReservations = (e: React.MouseEvent<HTMLAnchorElement>) => {

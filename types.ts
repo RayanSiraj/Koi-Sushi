@@ -10,12 +10,7 @@ export interface MenuItem {
 }
 
 export enum MenuCategory {
-  APPETIZERS = 'Appetizers',
-  SUSHI = 'Sushi Rolls',
-  SASHIMI = 'Sashimi & Nigiri',
-  THAI = 'Thai Entrees',
-  DRINKS = 'Craft Cocktails',
-  SPECIALS = 'Chef Specials'
+  FEATURED = 'Featured Dishes'
 }
 
 export interface Reservation {

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { getGeminiResponse } from '../services/geminiService.ts';
-import { ChatMessage } from '../types.ts';
-import { ScrollReveal } from './ScrollReveal.tsx';
+import { getGeminiResponse } from '../services/geminiService';
+import { ChatMessage, Reservation } from '../types';
+import { ScrollReveal } from './ScrollReveal';
 
 export const ReservationsAI: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -9,6 +9,7 @@ export const ReservationsAI: React.FC = () => {
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [confirmedReservation, setConfirmedReservation] = useState<Reservation | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -28,14 +29,90 @@ export const ReservationsAI: React.FC = () => {
     setIsTyping(true);
 
     try {
-      const responseText = await getGeminiResponse(newHistory);
-      setMessages(prev => [...prev, { role: 'model', text: responseText, timestamp: new Date() }]);
+      const response = await getGeminiResponse(newHistory);
+      
+      if (response.functionCalls) {
+        for (const call of response.functionCalls) {
+          if (call.name === 'bookReservation') {
+            const args = call.args as any;
+            const reservation: Reservation = {
+              id: Math.random().toString(36).substr(2, 9),
+              name: args.name,
+              date: args.date,
+              time: args.time,
+              partySize: args.partySize,
+              notes: args.notes
+            };
+            
+            setConfirmedReservation(reservation);
+            setMessages(prev => [...prev, { 
+              role: 'model', 
+              text: `Perfect. I've secured a table for ${args.partySize} under the name ${args.name} for ${args.date} at ${args.time}. We look forward to seeing you!`, 
+              timestamp: new Date() 
+            }]);
+          }
+        }
+      } else if (response.text) {
+        setMessages(prev => [...prev, { role: 'model', text: response.text, timestamp: new Date() }]);
+      }
     } catch (err) {
       console.error("Chat Error:", err);
+      setMessages(prev => [...prev, { role: 'model', text: "I apologize, I'm having trouble processing that. Please call us at (904) 285-8631.", timestamp: new Date() }]);
     } finally {
       setIsTyping(false);
     }
   };
+
+  if (confirmedReservation) {
+    return (
+      <section id="reservations" className="py-32 bg-koi-black relative overflow-hidden scroll-mt-24">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="max-w-3xl mx-auto bg-white/[0.02] premium-blur border border-koi-gold/30 p-12 md:p-20 text-center relative">
+            <div className="absolute top-0 left-0 w-full h-1 bg-koi-gold"></div>
+            <div className="mb-12">
+              <div className="w-20 h-20 bg-koi-gold/10 rounded-full flex items-center justify-center mx-auto mb-8 border border-koi-gold/20">
+                <i className="fas fa-check text-koi-gold text-3xl"></i>
+              </div>
+              <span className="text-koi-gold font-bold tracking-[0.5em] uppercase text-[11px] mb-4 block">Reservation Confirmed</span>
+              <h2 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6">See you soon, <br/><span className="italic gold-gradient-text">{confirmedReservation.name}</span></h2>
+            </div>
+
+            <div className="grid grid-cols-2 gap-8 mb-12 text-left border-y border-white/5 py-12">
+              <div>
+                <p className="text-white/30 text-[10px] uppercase tracking-widest mb-2">Date</p>
+                <p className="text-white text-lg font-light">{confirmedReservation.date}</p>
+              </div>
+              <div>
+                <p className="text-white/30 text-[10px] uppercase tracking-widest mb-2">Time</p>
+                <p className="text-white text-lg font-light">{confirmedReservation.time}</p>
+              </div>
+              <div>
+                <p className="text-white/30 text-[10px] uppercase tracking-widest mb-2">Guests</p>
+                <p className="text-white text-lg font-light">{confirmedReservation.partySize} People</p>
+              </div>
+              <div>
+                <p className="text-white/30 text-[10px] uppercase tracking-widest mb-2">Location</p>
+                <p className="text-white text-lg font-light italic">Ponte Vedra Beach</p>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <p className="text-white/50 text-sm font-light leading-relaxed italic">
+                A confirmation has been sent to your digital wallet. <br/>
+                Need to change something? Call us at (904) 285-8631.
+              </p>
+              <button 
+                onClick={() => setConfirmedReservation(null)}
+                className="text-koi-gold text-[10px] font-bold uppercase tracking-[0.4em] hover:text-white transition-all mt-8"
+              >
+                Back to Concierge
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="reservations" className="py-32 bg-koi-black relative overflow-hidden scroll-mt-24">

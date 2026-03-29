@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from 'react';
-import { MENU_ITEMS, ORDERING_URL } from '../constants.tsx';
-import { MenuCategory } from '../types.ts';
-import { ScrollReveal } from './ScrollReveal.tsx';
+import { MENU_ITEMS, ORDERING_URL } from '../constants';
+import { MenuCategory } from '../types';
+import { ScrollReveal } from './ScrollReveal';
 
 export const Menu: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<MenuCategory>(MenuCategory.SUSHI);
+  const [activeTab, setActiveTab] = useState<MenuCategory>(MenuCategory.FEATURED);
 
   const categories = Object.values(MenuCategory);
   
@@ -24,24 +24,26 @@ export const Menu: React.FC = () => {
               </h2>
             </div>
             
-            <div className="flex flex-wrap gap-x-8 gap-y-4 items-center">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveTab(cat)}
-                  className={`text-[10px] font-bold uppercase tracking-[0.3em] transition-all relative py-2 outline-none ${
-                    activeTab === cat 
-                    ? 'text-koi-gold' 
-                    : 'text-white/30 hover:text-white/70'
-                  }`}
-                >
-                  {cat}
-                  {activeTab === cat && (
-                    <div className="absolute bottom-[-9px] left-0 w-full h-[2px] bg-koi-gold animate-fade-in shadow-[0_0_10px_rgba(197,160,89,0.5)]"></div>
-                  )}
-                </button>
-              ))}
-            </div>
+            {categories.length > 1 && (
+              <div className="flex flex-wrap gap-x-8 gap-y-4 items-center">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveTab(cat)}
+                    className={`text-[10px] font-bold uppercase tracking-[0.3em] transition-all relative py-2 outline-none ${
+                      activeTab === cat 
+                      ? 'text-koi-gold' 
+                      : 'text-white/30 hover:text-white/70'
+                    }`}
+                  >
+                    {cat}
+                    {activeTab === cat && (
+                      <div className="absolute bottom-[-9px] left-0 w-full h-[2px] bg-koi-gold animate-fade-in shadow-[0_0_10px_rgba(197,160,89,0.5)]"></div>
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </ScrollReveal>
 

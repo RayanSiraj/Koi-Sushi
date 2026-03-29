@@ -1,5 +1,5 @@
-import { GoogleGenAI } from "@google/genai";
-import { ChatMessage } from "../types.ts";
+import { GoogleGenAI, Type, FunctionDeclaration } from "@google/genai";
+import { ChatMessage } from "../types";
 
 const SYSTEM_INSTRUCTION = `
 You are the AI Concierge for Koi Sushi & Thai & Bar in Ponte Vedra/Jacksonville.
@@ -15,17 +15,31 @@ RESERVATION RULES:
 2. We serve Lunch (11:30am-3pm) and Dinner (4:30pm-close).
 3. If a user wants to book, ask for: Date, Time, Party Size, and Name.
 
-When you have ALL the information (Date, Time, Party Size, Name), confirm the details and tell them their table is requested.
+When you have ALL the information (Date, Time, Party Size, Name), use the 'bookReservation' tool to finalize the request.
 If asked about the menu, highlight our popular items like Dragon Roll or Pad Thai.
 Keep your tone warm, professional, and helpful. Use short, elegant sentences.
 `;
 
+const bookReservationDeclaration: FunctionDeclaration = {
+  name: "bookReservation",
+  description: "Finalize a table reservation at KOI.",
+  parameters: {
+    type: Type.OBJECT,
+    properties: {
+      name: { type: Type.STRING, description: "Full name for the reservation" },
+      date: { type: Type.STRING, description: "Date of the reservation (e.g., '2024-05-20')" },
+      time: { type: Type.STRING, description: "Time of the reservation (e.g., '7:00 PM')" },
+      partySize: { type: Type.NUMBER, description: "Number of guests" },
+      notes: { type: Type.STRING, description: "Any special requests or dietary notes" }
+    },
+    required: ["name", "date", "time", "partySize"]
+  }
+};
+
 export const getGeminiResponse = async (history: ChatMessage[]) => {
   try {
-    // Initialize inside the function to ensure up-to-date environment context
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     
-    // Format history: ensure we alternate roles correctly
     const contents = history.map(msg => ({
       role: msg.role === 'user' ? 'user' : 'model',
       parts: [{ text: msg.text }]
@@ -38,12 +52,19 @@ export const getGeminiResponse = async (history: ChatMessage[]) => {
         systemInstruction: SYSTEM_INSTRUCTION,
         temperature: 0.7,
         topP: 0.9,
+        tools: [{ functionDeclarations: [bookReservationDeclaration] }]
       },
     });
 
-    return response.text || "I apologize, I'm having trouble processing that request. Please call us at (904) 285-8631.";
+    return {
+      text: response.text || "",
+      functionCalls: response.functionCalls
+    };
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "I'm having a bit of trouble connecting to my reservation system. Please feel free to give us a call for immediate assistance.";
+    return {
+      text: "I'm having a bit of trouble connecting to my reservation system. Please feel free to give us a call for immediate assistance.",
+      functionCalls: undefined
+    };
   }
 };
