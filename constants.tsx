@@ -19,7 +19,7 @@ export const MENU_ITEMS: MenuItem[] = [
     description: 'A5 Miyazaki Wagyu, lightly seared and served with truffle ponzu, crispy garlic chips, and micro-greens.',
     price: '$42',
     category: MenuCategory.FEATURED,
-    image: 'https://images.unsplash.com/photo-1604328698692-f76ea9498e76?auto=format&fit=crop&q=80&w=800',
+    image: 'https://images.unsplash.com/photo-1615937657715-bc7b4b7962c1?auto=format&fit=crop&q=80&w=800',
     popular: true
   },
   {
